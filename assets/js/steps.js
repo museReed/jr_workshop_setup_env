@@ -41,13 +41,13 @@ cd claude-code-workshop-jr-student && ls exercises/`, agentPrompt: "請幫我把
     badge: "Claude Code 為主",
     mac_win: "macOS 為主",
     goal: "讓 Antigravity 幫你把主要 AI 工具裝好。你的角色從「自己動手」變成「看著 AI 做、確認每一步」。",
-    intro: "<code>setup.md</code> 是一份給 AI 看的安裝說明書。你把它交給 Antigravity，它會照著幫你準備電腦；你只要看清楚它要做什麼，再按允許。",
+    intro: "<code>agent-setup/to_IDE_AI_Agent_setup.md</code> 是一份給 AI 看的安裝說明書。你把它交給 Antigravity，它會照著幫你準備電腦；你只要看清楚它要做什麼，再按允許。",
     analogy: "注意那個一直跳出來的 <b>Allow?</b>——AI 每次要動你的電腦前都會先問你。你按允許，它才會繼續；你不按，它就會停下來。",
     kind: "steps",
     commands: [
       { label: "① 打開資料夾", lang: "text", code: "Antigravity → Open Folder → 選桌面的 claude-code-workshop-jr-student → 打開右側 AI 助手面板。", note: null },
-      { label: "② 把 setup.md 交給它", lang: "text", code: "把 setup.md 拖進 AI 助手的對話框（或輸入 @setup.md 選它），再貼下面這句話。", note: null },
-      { label: "這句話（貼進 AI 助手對話框）", lang: "prompt", code: "請依照這份 setup.md 幫我把上課需要的工具準備好。文件裡寫「Cursor」的地方，就是指你。", note: "這份說明書原本寫給另一個 AI 工具；補這句話，是告訴 Antigravity：現在由你來做。" },
+      { label: "② 把 IDE 安裝文件交給它", lang: "text", code: "把 `agent-setup/to_IDE_AI_Agent_setup.md` 拖進 AI 助手的對話框（或輸入 `@agent-setup/to_IDE_AI_Agent_setup.md` 選它），再貼下面這句話。", note: null },
+      { label: "這句話（貼進 AI 助手對話框）", lang: "prompt", code: "請依照 agent-setup/to_IDE_AI_Agent_setup.md 幫我把上課需要的工具準備好。你是 Antigravity 裡的 AI Agent，請照文件一步一步帶我設定。", note: "這句話明確指定最新 repo 裡的安裝文件，避免 AI 去找舊的 setup.md。" },
       { label: "③ 監工 AI 四個動作", lang: "text", code: "AI 會依序：問你使用哪個帳號 → 檢查電腦缺什麼 → 幫你安裝需要的工具 → 帶你登入。每次看到 Allow，先看清楚它要做什麼，再按允許。", note: null },
       { label: "Codex 使用者看這裡", lang: "bash", code: "如果你是用 ChatGPT Plus，就回答「Codex」。AI 會改裝 OpenAI 的工具，其餘流程一樣：檢查、安裝、登入。", note: null, collapsible: true }
     ],
@@ -101,8 +101,8 @@ codex`, agentPrompt: "請幫我打開 terminal，進入桌面上的 claude-code-
     kind: "steps",
     commands: [
       { label: "① 註冊帳號", lang: "text", code: "https://github.com/signup", note: "填 email、設密碼、選一個好記的英文 username（它會出現在你的作品網址裡）。已有帳號就跳過。" },
-      { label: "② 交給 Claude Code", lang: "text", code: "回到 Claude Code，說「請依照 github-setup.md 幫我設定 GitHub」。接著它會顯示一組一次性代碼，並打開瀏覽器；你把代碼貼上、按授權，剩下交給 AI。", note: null },
-      { label: "③ 驗證", lang: "bash", code: "gh repo view --web", agentPrompt: "請幫我確認 GitHub 設定是否成功。請先確認目前在正確的 workshop 資料夾或成果資料夾，然後使用 GitHub CLI 打開目前 repo 的 GitHub 頁面。打開後請告訴我應該看到哪些檔案，才能判斷成果已經成功放到雲端。", note: "瀏覽器會打開你的 GitHub 雲端資料夾。看到檔案，就代表成果已經放上去了。" }
+      { label: "② 交給 Claude Code", lang: "text", code: "回到 Claude Code，說「請依照 agent-setup/github-setup.md 幫我設定 GitHub」。接著它會顯示一組一次性代碼，並打開瀏覽器；你把代碼貼上、按授權，剩下交給 AI。", note: null },
+      { label: "③ 驗證", lang: "bash", code: "gh repo view --web", agentPrompt: "請幫我確認 GitHub 設定是否成功。請先確認目前在正確的 workshop 資料夾或成果資料夾；如果需要讀設定文件，請使用 agent-setup/github-setup.md。然後使用 GitHub CLI 打開目前 repo 的 GitHub 頁面。打開後請告訴我應該看到哪些檔案，才能判斷成果已經成功放到雲端。", note: "瀏覽器會打開你的 GitHub 雲端資料夾。看到檔案，就代表成果已經放上去了。" }
     ],
     checklist: ["看到登入成功訊息", "GitHub 出現新的雲端資料夾，而且裡面有檔案"]
   }

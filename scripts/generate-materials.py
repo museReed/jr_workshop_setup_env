@@ -11,22 +11,12 @@ SRC = Path(sys.argv[1]).resolve()
 OUT = Path(sys.argv[2]).resolve()
 
 include_roots = [
-    '課程練習素材',
-    '.claude/skills',
+    'exercises',
+    'agent-setup',
+    'student-guide',
 ]
 include_files = [
     'README.md',
-    'faq.md',
-    'setup.md',
-    'github-setup.md',
-    'panel-setup.md',
-    'onboarding.md',
-    '學生閱讀資料/faq.md',
-    '學生閱讀資料/onboarding.md',
-    '給AI_Agent的環境安裝文件/github-setup.md',
-    '給AI_Agent的環境安裝文件/to_CLI_AI_Agent_setup.md',
-    '給AI_Agent的環境安裝文件/to_IDE_AI_Agent_setup.md',
-    '給AI_Agent的環境安裝文件/ClaudeCodeSkill/panel-setup.md',
 ]
 exclude_parts = {'.git', '.obsidian'}
 

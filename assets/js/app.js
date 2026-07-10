@@ -10,8 +10,8 @@
   let duckTimer = null;
   let activeMaterialPath = materials.files['README.md'] ? 'README.md' : Object.keys(materials.files || {})[0];
   const readingDocs = [
-    { id: 'onboarding', title: '課前準備與操作小抄', path: '學生閱讀資料/onboarding.md' },
-    { id: 'faq', title: '課後 FAQ', path: '學生閱讀資料/faq.md' }
+    { id: 'onboarding', title: '課前準備與操作小抄', path: 'student-guide/onboarding.md' },
+    { id: 'faq', title: '課後 FAQ', path: 'student-guide/faq.md' }
   ];
 
   function esc(value){
@@ -153,7 +153,7 @@
       <article class="reading-stack">
         <section class="ds-card reading-card reading-intro-card">
           <div class="reading-card-head">
-            <span class="ds-pill">學生閱讀資料/onboarding.md</span>
+            <span class="ds-pill">student-guide/onboarding.md</span>
             <a class="ds-btn ds-btn-ghost ds-btn-sm" href="#/item/explore-materials">回素材瀏覽器</a>
           </div>
           <h1 class="reading-title">${esc(title)}</h1>
@@ -241,7 +241,7 @@
       <article class="reading-stack">
         <section class="ds-card reading-card reading-intro-card">
           <div class="reading-card-head">
-            <span class="ds-pill">學生閱讀資料/faq.md</span>
+            <span class="ds-pill">student-guide/faq.md</span>
             <a class="ds-btn ds-btn-ghost ds-btn-sm" href="#/item/explore-materials">回素材瀏覽器</a>
           </div>
           <h1 class="reading-title">${esc(title)}</h1>
