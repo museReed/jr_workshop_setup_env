@@ -50,6 +50,14 @@
   --term-bg:#1F1B16; --term-bg-2:#2A241D; --term-ink:#F0ECE4; --term-ink-dim:#B3A99B;
   --term-prompt:#E8A06A; --term-ok:#30CECE; --term-err:#E89080; --term-folder:#7FB8E0;
 
+  /* 指令/Prompt 切換元件 */
+  --cmd-switch-bg:rgba(251,248,242,.08);
+  --cmd-switch-border:rgba(201,191,169,.38);
+  --cmd-switch-text:var(--term-ink-dim);
+  --cmd-switch-active-bg:var(--color-accent);
+  --cmd-switch-active-text:#fff;
+  --cmd-switch-focus:var(--term-folder);
+
   /* ---------- 字體 / 字級 / 行高 ---------- */
   --font-sans:"Noto Sans TC","PingFang TC",system-ui,-apple-system,sans-serif;
   --font-serif:"Noto Serif TC","Songti TC",Georgia,serif;

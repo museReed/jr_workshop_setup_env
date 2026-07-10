@@ -37,6 +37,14 @@
     "terminal": {
       "bg": "#1F1B16", "bg-2": "#2A241D", "ink": "#F0ECE4", "ink-dim": "#B3A99B",
       "prompt": "#E8A06A", "ok": "#30CECE", "err": "#E89080", "folder": "#7FB8E0"
+    },
+    "commandSwitch": {
+      "bg": "rgba(251,248,242,.08)",
+      "border": "rgba(201,191,169,.38)",
+      "text": "terminal.ink-dim",
+      "active-bg": "color.accent",
+      "active-text": "#ffffff",
+      "focus": "terminal.folder"
     }
   },
   "font": {
@@ -62,6 +70,6 @@
     "button (primary / dark / ghost / sm)", "card / card-flat", "pill (default / accent / success)",
     "nav (sticky, blur)", "callout (analogy box)", "keyPoints list", "fileTree (interactive)",
     "quiz (option states + explain)", "sidebar item", "section header pill",
-    "progress bar", "walking-duck mascot", "terminal window"
+    "progress bar", "walking-duck mascot", "terminal window", "command audience switch (Terminal / AI Agent)"
   ]
 }

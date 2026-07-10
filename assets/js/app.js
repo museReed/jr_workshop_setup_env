@@ -411,8 +411,9 @@
       if (isHintCommand(command)) return renderHintBlock(command,index,canToggle,collapsed);
       return renderStepBlock(command,index,canToggle,collapsed);
     }
+    const hasAgentPrompt = Boolean(command.agentPrompt);
     return `
-      <div class="cmd-wrap cmd-lang--${esc(lang)} ${collapsed}" data-cmd-index="${index}">
+      <div class="cmd-wrap cmd-lang--${esc(lang)} ${collapsed}" data-cmd-index="${index}" data-active-mode="terminal">
         <div class="ds-term">
           <div class="ds-term-chrome cmd-chrome" data-toggle-cmd="${canToggle ? '1' : '0'}">
             <div class="cmd-chrome-main">
@@ -420,11 +421,11 @@
               <span class="ds-term-dot cmd-dot-warn"></span>
               <span class="ds-term-dot cmd-dot-success"></span>
               <button class="cmd-title ${canToggle ? 'can-toggle' : ''}" type="button" ${canToggle ? '' : 'tabindex="-1"'}>${esc(command.label || '指令')}</button>
-              ${renderCommandKind(lang)}
+              ${hasAgentPrompt ? renderCommandModeSwitch(index) : renderCommandKind(lang)}
             </div>
             <button class="cmd-copy" type="button" data-copy="${index}">複製</button>
           </div>
-          <pre class="ds-term-body cmd-code"><code>${renderCommandCode(command.code, lang)}</code></pre>
+          ${hasAgentPrompt ? renderCommandPanes(command, lang) : `<pre class="ds-term-body cmd-code"><code>${renderCommandCode(command.code, lang)}</code></pre>`}
         </div>
         ${command.note ? `<div class="cmd-note">${esc(command.note)}</div>` : ''}
       </div>`;
@@ -497,6 +498,20 @@
     if (lang === 'slash') return '<span class="cmd-kind">貼進 Claude Code</span>';
     if (lang === 'prompt') return '<span class="cmd-kind">貼進 AI Agent</span>';
     return '';
+  }
+
+  function renderCommandModeSwitch(index){
+    return `
+      <span class="cmd-mode-switch" role="tablist" aria-label="選擇複製內容">
+        <button class="cmd-mode-tab is-active" type="button" role="tab" aria-selected="true" data-mode-tab="terminal" data-mode-index="${index}">給 Terminal</button>
+        <button class="cmd-mode-tab" type="button" role="tab" aria-selected="false" data-mode-tab="agent" data-mode-index="${index}">給 AI Agent</button>
+      </span>`;
+  }
+
+  function renderCommandPanes(command, lang){
+    return `
+      <pre class="ds-term-body cmd-code cmd-pane" data-mode-pane="terminal"><code>${renderCommandCode(command.code, lang)}</code></pre>
+      <pre class="ds-term-body cmd-code cmd-pane" data-mode-pane="agent" hidden><code>${renderCommandCode(command.agentPrompt, 'prompt')}</code></pre>`;
   }
 
   function renderCommandCode(code, lang){
@@ -733,15 +748,35 @@
         event.stopPropagation();
         const command = step.commands[Number(button.dataset.copy)];
         if (!command) return;
-        await copyText(command.code);
+        const wrap = button.closest('.cmd-wrap');
+        const activeMode = wrap?.dataset.activeMode || 'terminal';
+        const textToCopy = activeMode === 'agent' && command.agentPrompt ? command.agentPrompt : command.code;
+        await copyText(textToCopy);
         const old = button.textContent;
         button.textContent = '已複製 ✓';
         setTimeout(() => { button.textContent = old; }, 1500);
       });
     });
+    document.querySelectorAll('[data-mode-tab]').forEach(tab => {
+      tab.addEventListener('click', event => {
+        event.stopPropagation();
+        const mode = tab.dataset.modeTab;
+        const wrap = tab.closest('.cmd-wrap');
+        if (!mode || !wrap) return;
+        wrap.dataset.activeMode = mode;
+        wrap.querySelectorAll('[data-mode-tab]').forEach(button => {
+          const active = button.dataset.modeTab === mode;
+          button.classList.toggle('is-active', active);
+          button.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        wrap.querySelectorAll('[data-mode-pane]').forEach(pane => {
+          pane.hidden = pane.dataset.modePane !== mode;
+        });
+      });
+    });
     document.querySelectorAll('[data-toggle-cmd="1"]').forEach(row => {
       row.addEventListener('click', event => {
-        if (event.target.closest('[data-copy]')) return;
+        if (event.target.closest('[data-copy], [data-mode-tab]')) return;
         row.closest('.cmd-wrap').classList.toggle('is-collapsed');
       });
     });

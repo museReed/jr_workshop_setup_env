@@ -49,6 +49,10 @@ button,input,textarea{font:inherit}
 .cmd-chrome-main{display:flex;align-items:center;gap:7px;min-width:0}
 .cmd-title{appearance:none;background:transparent;border:0;color:var(--term-ink-dim);padding:0;margin:0 0 0 var(--space-2);font-family:var(--font-mono);font-size:var(--fs-xs);text-align:left;cursor:default;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cmd-title.can-toggle{cursor:pointer}
+.cmd-mode-switch{display:inline-flex;align-items:center;gap:2px;margin-left:var(--space-2);padding:2px;border:1px solid var(--cmd-switch-border);border-radius:var(--r-pill);background:var(--cmd-switch-bg)}
+.cmd-mode-tab{appearance:none;border:0;border-radius:var(--r-pill);background:transparent;color:var(--cmd-switch-text);padding:3px 9px;font-family:var(--font-sans);font-size:var(--fs-xs);font-weight:700;line-height:var(--lh-snug);cursor:pointer;white-space:nowrap}
+.cmd-mode-tab.is-active{background:var(--cmd-switch-active-bg);color:var(--cmd-switch-active-text)}
+.cmd-mode-tab:focus-visible{outline:2px solid var(--cmd-switch-focus);outline-offset:2px}
 .cmd-code{white-space:pre;overflow-x:auto;margin:0}
 .cmd-copy{background:transparent;border:1px solid var(--neutral-5);color:var(--term-ink-dim);border-radius:var(--r-sm);padding:3px 10px;font-family:var(--font-mono);font-size:var(--fs-xs);cursor:pointer;white-space:nowrap}
 .cmd-copy:hover{color:var(--term-ink);border-color:var(--term-prompt)}
@@ -57,7 +61,9 @@ button,input,textarea{font:inherit}
 .cmd-dot-warn{background:var(--color-warn)}
 .cmd-dot-success{background:var(--color-success)}
 .cmd-note{font-family:var(--font-sans);font-size:var(--fs-sm);color:var(--color-text-muted);margin:6px 2px 0;line-height:var(--lh-relaxed)}
+.cmd-pane[hidden]{display:none}
 .cmd-wrap.is-collapsed .cmd-code{display:none}
+.cmd-wrap.is-collapsed .cmd-pane{display:none}
 .cmd-wrap.is-collapsed .cmd-note{display:none}
 .cmd-wrap.is-collapsed .cmd-title::before{content:"展開 · "}
 .cmd-wrap:not(.is-collapsed) .cmd-title.can-toggle::before{content:"收合 · "}
@@ -146,6 +152,8 @@ button,input,textarea{font:inherit}
   .mat-panel{height:58vh}
 }
 @media(max-width:560px){
+  .cmd-chrome-main{align-items:flex-start;flex-wrap:wrap}
+  .cmd-mode-switch{margin-left:0}
   .nav-inner{align-items:flex-start;flex-direction:column;padding-top:var(--space-3);padding-bottom:var(--space-3)}
   .nav-actions{justify-content:flex-start}
   .progress-wrap{top:124px}
