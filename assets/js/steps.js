@@ -49,7 +49,7 @@ cd claude-code-workshop-jr-student && ls exercises/`, agentPrompt: "請幫我把
       { label: "② 把 IDE 安裝文件交給它", lang: "text", code: "把 `agent-setup/to_IDE_AI_Agent_setup.md` 拖進 AI 助手的對話框（或輸入 `@agent-setup/to_IDE_AI_Agent_setup.md` 選它），再貼下面這句話。", note: null },
       { label: "這句話（貼進 AI 助手對話框）", lang: "prompt", code: "請依照 agent-setup/to_IDE_AI_Agent_setup.md 幫我把上課需要的工具準備好。你是 Antigravity 裡的 AI Agent，請照文件一步一步帶我設定。", note: "這句話明確指定最新 repo 裡的安裝文件，避免 AI 去找舊的 setup.md。" },
       { label: "③ 監工 AI 四個動作", lang: "text", code: "AI 會依序：問你使用哪個帳號 → 檢查電腦缺什麼 → 幫你安裝需要的工具 → 帶你登入。每次看到 Allow，先看清楚它要做什麼，再按允許。", note: null },
-      { label: "Codex 使用者看這裡", lang: "bash", code: "如果你是用 ChatGPT Plus，就回答「Codex」。AI 會改裝 OpenAI 的工具，其餘流程一樣：檢查、安裝、登入。", note: null, collapsible: true }
+      { label: "Codex 使用者看這裡", lang: "text", code: "如果你是用 ChatGPT Plus，就回答「Codex」。AI 會改裝 OpenAI 的工具，其餘流程一樣：檢查、安裝、登入。", note: null, collapsible: true }
     ],
     checklist: ["Claude Code（或 Codex）已安裝完成"]
   },
